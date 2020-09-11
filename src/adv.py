@@ -54,9 +54,50 @@ player = Player('Player 1', room['outside'])
 #
 # If the user enters "q", quit the game.
 
+directions = ['n', 's', 'e', 'w']
+
 while True:
     print(player.currentRoom)
-    print('North: n  |  South: s  |  East: e  |  West: w')
+    print('North: n  |  South: s  |  East: e  |  West: w  | Quit: q')
+    currentRoom = player.currentRoom
     what_next = input('Enter direction: ')
+    if len(what_next) == 1:
+        if what_next not in directions:
+            print("""Invalid Entry...\n 
+            Please enter: North: n  |  South: s  |  East: e  |  West: w  |  Quit: q""")
+        
+            if what_next == 'q':
+                print('Game ended')
+                break
+            
+            elif what_next == 'n':
+                if currentRoom.n_to is None:
+                    print('Not valid, change direction')
+                    continue
+                else:
+                    player.currentRoom = currentRoom.n_to
+            
+            elif what_next == 's':
+                if currentRoom.s_to is None:
+                    print('Not valid, change direction')
+                    continue
+                else:
+                    player.currentRoom = currentRoom.s_to
 
+            elif what_next == 'e':
+                if currentRoom.e_to is None:
+                    print('Not valid, change direction')
+                    continue
+                else:
+                    player.currentRoom = currentRoom.e_to
+
+            elif what_next == 'w':
+                if currentRoom.w_to is None:
+                    print('Not valid, change direction')
+                    continue
+                else:
+                    player.currentRoom = currentRoom.w_to
+    else:
+        print('Enter just one character')
+        continue
 
